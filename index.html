@@ -1,0 +1,67 @@
+<body></body>
+<script src="/three.js"></script>
+<script>
+  // The "scene" is where stuff in our game will happen:
+  var scene = new THREE.Scene();
+  var flat = {flatShading: true};
+  var light = new THREE.AmbientLight('white', 0.8);
+  scene.add(light);
+
+  // The "camera" is what sees the stuff:
+  var aspectRatio = window.innerWidth / window.innerHeight;
+  var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
+  camera.position.z = 500;
+  scene.add(camera);
+
+  // The "renderer" draws what the camera sees onto the screen:
+  var renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // ******** START CODING ON THE NEXT LINE ********
+ 
+//FIGURAS
+
+  var head = new THREE.SphereGeometry(100,100,100);
+  var hand = new THREE.SphereGeometry(50);
+  var foot = new THREE.SphereGeometry(50);
+  var body = new THREE.CylinderGeometry(50,100,100);
+  
+  // MATERIALES
+  
+  var cover = new THREE.MeshNormalMaterial();
+  
+  //OBJETOS
+  var  avatar = new THREE.Mesh(head,cover);
+  var righthand = new THREE.Mesh(hand,cover);
+  var  lefthand = new THREE.Mesh(hand, cover);
+  var rightfoot = new  THREE.Mesh(foot, cover);
+  var leftfoot = new THREE.Mesh(foot, cover);
+  var bodys = new THREE.Mesh(body, cover);
+  // ESCENAS
+  scene.add(avatar);
+  scene.add(righthand);
+  scene.add(lefthand);
+  scene.add(rightfoot);
+  scene.add(leftfoot);
+  scene.add(bodys);
+  
+  // POSICIONES
+  avatar.position.set(0,150,0);
+  righthand.position.set(-150,0,0);
+  lefthand.position.set(150,0,0);
+  rightfoot.position.set(-75,-125,0);
+  leftfoot.position.set(75,-125,0);
+  
+  
+  
+  //ROTACIONES
+  
+ 
+ 
+//camera.position.set(0,0,0);
+camera.lookAt(bodys.position);
+
+  // Now, show what the camera sees on the screen:
+  renderer.render(scene, camera);
+</script>
