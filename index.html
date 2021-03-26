@@ -1,5 +1,6 @@
 <body></body>
-<script src="/three.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+
 <script>
   // The "scene" is where stuff in our game will happen:
   var scene = new THREE.Scene();
@@ -39,12 +40,12 @@
   var leftfoot = new THREE.Mesh(foot, cover);
   var bodys = new THREE.Mesh(body, cover);
   // ESCENAS
-  scene.add(avatar);
-  scene.add(righthand);
-  scene.add(lefthand);
-  scene.add(rightfoot);
-  scene.add(leftfoot);
-  scene.add(bodys);
+  //scene.add(avatar);
+  //scene.add(righthand);
+  //scene.add(lefthand);
+  //scene.add(rightfoot);
+  //scene.add(leftfoot);
+  
   
   // POSICIONES
   avatar.position.set(0,150,0);
@@ -52,16 +53,52 @@
   lefthand.position.set(150,0,0);
   rightfoot.position.set(-75,-125,0);
   leftfoot.position.set(75,-125,0);
+    bodys.position.set (0,0,-1000);
   
-  
+    bodys.add(avatar);
+    bodys.add(righthand);
+    bodys.add(lefthand);
+    bodys.add(rightfoot);
+    bodys.add(leftfoot);
+    scene.add(bodys);
+   
   
   //ROTACIONES
   
- 
- 
-//camera.position.set(0,0,0);
-camera.lookAt(bodys.position);
+   
+    
+     let isCartweeling = false;
+    var isFlipping = false;
 
+   
+document.addEventListener('keydown', teclaApretada);
+function teclaApretada(event){
+    var code = event.code;
+    if (code == 'KeyA') bodys.position.x = bodys.position.x - 6;
+    if (code == 'KeyD') bodys.position.x = bodys.position.x + 6;
+ if (code == 'KeyW') bodys.position.z = bodys.position.z - 6;
+    if (code == 'KeyS') bodys.position.z = bodys.position.z + 6;
+    if (code == 'KeyC') isCartweeling = !isCartweeling;
+    if(code == 'KeyF') isFlipping = !isFlipping;
+    
+}
+    
+
+camera.position.set(0,0,0);
+//camera.lookAt(bodys.position);
+ //ANIMAR
+function animate() {
+    requestAnimationFrame(animate);
+    bodys.rotation.z = bodys.rotation.z + 0.05;
+    renderer.render(scene, camera);
+    if (isCartweeling) {
+        bodys.rotation.z  = bodys.rotation.z+0.05;
+    }
+    if (isFlipping){
+        bodys.rotation.x = bodys.rotation.z +0.05;
+    }
+}
+animate();
   // Now, show what the camera sees on the screen:
-  renderer.render(scene, camera);
+  //renderer.render(scene, camera);
 </script>
