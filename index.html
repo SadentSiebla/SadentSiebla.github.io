@@ -72,9 +72,9 @@
         new THREE.CylinderGeometry (50,50,200),
         new THREE.MeshBasicMaterial({color: "sienna"}));
     
-    var top  = new THREE.Mesh(
-    new THREE.SphereGeometry(150),
-    new THREE.MeshBasicMaterial({color: "forestgreen"}));
+        var top  = new THREE.Mesh(
+            new THREE.SphereGeometry(150),
+            new THREE.MeshBasicMaterial({color: "forestgreen"}));
         
         top.position.y=175;
         trunk.add(top);
@@ -83,6 +83,17 @@
         scene.add(trunk);
     }
     
+    function crearCampoAleatorio(numArboles, ancho, largo){
+    for (var i=0; i< numArboles; i++) {
+        var x = Math.random()*ancho-ancho/2;
+        var z = Math.random()*largo-largo/2;
+        makeTreeAt(x,z);
+    }
+    }
+    
+    makeTreeAt(0, 0);
+    makeTreeAt(500,-1500);
+    makeTreeAt(-400, -2000);
     
     
     
@@ -103,8 +114,9 @@ function teclaApretada(event){
 }
     
 
-camera.position.set(0,0,0);
-//camera.lookAt(bodys.position);
+camera.position.set(0,5000,5000);
+
+camera.lookAt(bodys.position);
  //ANIMAR
 function animate() {
     requestAnimationFrame(animate);
