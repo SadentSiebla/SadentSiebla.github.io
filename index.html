@@ -12,6 +12,8 @@
   var aspectRatio = window.innerWidth / window.innerHeight;
   var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
   camera.position.z = 500;
+  //  scene.add(camera);
+    
   
 
   // The "renderer" draws what the camera sees onto the screen:
@@ -39,13 +41,13 @@
   var rightfoot = new  THREE.Mesh(foot, cover);
   var leftfoot = new THREE.Mesh(foot, cover);
   var bodys = new THREE.Mesh(body, cover);
+    var marcador = new THREE.Object3D();
   // ESCENAS
   //scene.add(avatar);
   //scene.add(righthand);
   //scene.add(lefthand);
   //scene.add(rightfoot);
   //scene.add(leftfoot);
-  
   
   // POSICIONES
   avatar.position.set(0,150,0);
@@ -60,9 +62,12 @@
     bodys.add(lefthand);
     bodys.add(rightfoot);
     bodys.add(leftfoot);
-    scene.add(bodys);
+    marcador.add(camera);
+    marcador.add(bodys);
+    scene.add(marcador);
+
+   
     
-    avatar.add(camera);
    
   
   //ROTACIONES
@@ -120,19 +125,19 @@
 document.addEventListener('keydown', teclaApretada);
 function teclaApretada(event){
     var code = event.code;
-    if (code == 'KeyA') bodys.position.x = bodys.position.x - 6;
-    if (code == 'KeyD') bodys.position.x = bodys.position.x + 6;
- if (code == 'KeyW') bodys.position.z = bodys.position.z - 6;
-    if (code == 'KeyS') bodys.position.z = bodys.position.z + 6;
+    if (code == 'KeyA') marcador.position.x = marcador.position.x - 6;
+    if (code == 'KeyD') marcador.position.x = marcador.position.x + 6;
+ if (code == 'KeyW') marcador.position.z = marcador.position.z - 6;
+    if (code == 'KeyS') marcador.position.z = marcador.position.z + 6;
     if (code == 'KeyC') isCartweeling = !isCartweeling;
     if(code == 'KeyF') isFlipping = !isFlipping;
     
 }
     
 
-camera.position.set(0,5000,5000);
+//camera.position.set(0,5000,5000);
 
-camera.lookAt(bodys.position);
+//camera.lookAt(bodys.position);
  //ANIMAR
 function animate() {
     requestAnimationFrame(animate);
