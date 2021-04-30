@@ -42,6 +42,8 @@
   var leftfoot = new THREE.Mesh(foot, cover);
   var bodys = new THREE.Mesh(body, cover);
     var marcador = new THREE.Object3D();
+    
+    var notAllowed = [];
   // ESCENAS
   //scene.add(avatar);
   //scene.add(righthand);
@@ -78,16 +80,36 @@
         let trunk = new THREE.Mesh(
         new THREE.CylinderGeometry (50,50,200),
         new THREE.MeshBasicMaterial({color: "sienna"}));
+        
+        var boundary = new THREE.Mesh(new THREE.CircleGeometry(300),
+                                      new THREE.MeshNormalMaterial());
+         boundary.position.y = -100;
+    boundary.rotation.x  = -Math.PI/2;
+    trunk.add(boundary);
+    
+    notAllowed.push(boundary);
+    
     
         var top  = new THREE.Mesh(
             new THREE.SphereGeometry(150),
             new THREE.MeshBasicMaterial({color: "forestgreen"}));
+        
         
         top.position.y=175;
         trunk.add(top);
         
         trunk.position.set(x, -75, z);
         scene.add(trunk);
+    }
+   
+    function isColliding() {
+        var vector = new THREE.Vector3(0,-1,0);
+        var raycaster = new THREE.Raycaster(marcador.position, vector);
+        
+        var intersects = raycaster.intersectObjects(notAllowed);
+        if (intersects.lenght>0) return true;
+        
+        return false;
     }
     
    // function crearCampoAleatorio(numArboles, ancho, largo){
@@ -125,7 +147,8 @@
 document.addEventListener('keydown', teclaApretada);
 function teclaApretada(event){
     var code = event.code;
-    if (code == 'KeyA') marcador.position.x = marcador.position.x - 6;
+    if (code == 'KeyA') {marcador.position.x = marcador.position.x - 6;
+    isMovingLeft = true;}
     if (code == 'KeyD') marcador.position.x = marcador.position.x + 6;
  if (code == 'KeyW') 
     
