@@ -127,12 +127,20 @@ function teclaApretada(event){
     var code = event.code;
     if (code == 'KeyA') marcador.position.x = marcador.position.x - 6;
     if (code == 'KeyD') marcador.position.x = marcador.position.x + 6;
- if (code == 'KeyW') marcador.position.z = marcador.position.z - 6;
+ if (code == 'KeyW') 
+    
+     marcador.position.z = marcador.position.z - 6;
     if (code == 'KeyS') marcador.position.z = marcador.position.z + 6;
     if (code == 'KeyC') isCartweeling = !isCartweeling;
     if(code == 'KeyF') isFlipping = !isFlipping;
+    if(code == 'ArrowRight') marcador.rotation.y = marcador.rotation.y + 0.01;
+    if (code == 'ArrowLeft') marcador.rotation.y = marcador.rotation.y -0.01;
     
 }
+    function avanzar(direccion) {
+        console.log("Direccion:"  + direccion);
+        
+    }
     
 
 //camera.position.set(0,5000,5000);
