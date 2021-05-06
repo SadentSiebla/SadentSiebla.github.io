@@ -148,28 +148,22 @@ document.addEventListener('keydown', teclaApretada);
 function teclaApretada(event){
     var code = event.code;
     if (code == 'KeyA') {marcador.position.x = marcador.position.x - 6;
-    isMovingLeft = true;}
+    }
     if (code == 'KeyD') {marcador.position.x = marcador.position.x + 6;
-                         isMovingRight =  true;}
- if (code == 'KeyW') {
-     avanzar(marcador.rotatiion.y +Math.PI );
-     isMovingBack = true;}
+                         }
+    if (code == 'KeyW') {
+     avanzar(marcador.rotation.y +Math.PI );
+     }
     if (code == 'KeyS') {avanzar(marcador.rotation.y)
-                         isMovingForward = true;}
+                         }
     if (code == 'KeyC') isCartweeling = !isCartweeling;
     if(code == 'KeyF') isFlipping = !isFlipping;
     if(code == 'ArrowRight') marcador.rotation.y = marcador.rotation.y + 0.01;
     if (code == 'ArrowLeft') marcador.rotation.y = marcador.rotation.y -0.01;
-    
-    if(isColliding()) {
-        if(isMovingLeft) marcador.position.x = marcador.position.x +6;
-        if (isMovingRight) marcador.position.x = marcador.position.x -6;
-        if (isMovingBack) marcador.position.z = marcador.position.z -6;
-        if (isMovingForward) marcador.position.z = marcador.position.z +6;
         
     }
     
-}
+
     function avanzar(direccion) {
         direccion += Math.PI/2;
         console.log("Radianes:"  + direccion);
@@ -181,8 +175,8 @@ function teclaApretada(event){
         marcador.position.x += 20*Math.cos(direccion);
         
         if(bodysisColliding())  {
-            marcador.position.x -= -20*Math.sin(direccion);
-            marcador.position.z  += -20*Math.cos(direccion);
+            marcador.position.x += -20*Math.sin(direccion);
+            marcador.position.z  -= -20*Math.cos(direccion);
         }
         
         
