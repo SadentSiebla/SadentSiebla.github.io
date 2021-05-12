@@ -102,16 +102,7 @@
         scene.add(trunk);
     }
    
-    function isColliding() {
-        var vector = new THREE.Vector3(0,-1,0);
-        var raycaster = new THREE.Raycaster(marcador.position, vector);
-        
-        var intersects = raycaster.intersectObjects(notAllowed);
-        if (intersects.lenght>0) return true;
-        
-        return false;
-    }
-    
+  
    // function crearCampoAleatorio(numArboles, ancho, largo){
    // for (var i=0; i< numArboles; i++) {
      //   var x = Math.random()*ancho-ancho/2;
@@ -166,22 +157,33 @@ function teclaApretada(event){
 
     function avanzar(direccion) {
         direccion += Math.PI/2;
-        console.log("Radianes:"  + direccion);
-        console.log("Grados:" + direccion*180/Math.PI);
-        console.log("Sen(direccion):" + Math.sin(direccion));
-        console.log("Cos(direccion):" + Math.cos(direccion));
+        //console.log("Radianes:"  + direccion);
+        //console.log("Grados:" + direccion*180/Math.PI);
+        //console.log("Sen(direccion):" + Math.sin(direccion));
+        //console.log("Cos(direccion):" + Math.cos(direccion));
         
         marcador.position.z -= 20*Math.sin(direccion);
         marcador.position.x += 20*Math.cos(direccion);
-        
-        if(bodysisColliding())  {
-            marcador.position.x += -20*Math.sin(direccion);
-            marcador.position.z  -= -20*Math.cos(direccion);
+        if(isColliding())  {
+            console.log("Colisiona!");
+            marcador.position.z  -= -20*Math.sin(direccion);
+            marcador.position.x += -20*Math.cos(direccion);
+
         }
         
         
         
     }
+      function isColliding() {
+        var vector = new THREE.Vector3(0,-1,0);
+        var raycaster = new THREE.Raycaster(marcador.position, vector);
+        
+        var intersects = raycaster.intersectObjects(notAllowed);
+        if (intersects.length>0) return true;
+        
+        return false;
+    }
+    
     
 
 //camera.position.set(0,5000,5000);
